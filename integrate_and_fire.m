@@ -1,4 +1,5 @@
-function[x,y] = integrate_and_fire(I_e, delta_t, t_total)
+%% This function implements the integrate and fire model and returns the x and y vectors corresponding to time and potential
+function[x, y] = integrate_and_fire(I_e, delta_t, t_total)
     V_threshold = -0.050; %Volts, the point at which the neuron will fire
     V_reset = -0.065; %Volts, the membrane potential restored after firing
     % calculate the number of samples we'll need and create the vectors
