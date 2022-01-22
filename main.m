@@ -41,5 +41,28 @@ ylabel('Firing Rate (Hertz)', FontSize=16);
 title('Relationship between I_e and Firing Rate', FontSize=20)
 
 %% 3.5 part 1: Randomly varying I_e
+total_time = 0.02; %back to total from 3.3
+%now, create the vector for values of I_e, which are randomly generated to
+%be values between 1.5*10^-9 and 1.15*10^-8 amperes 
+I_e = zeros(total_time/delta_t, 1);
+for i = 1:(total_time/delta_t)
+    I_e(i) = (rand + 0.15) * 10^-8;
+end 
+% call our helper function to populate the arrays and count the spikes 
+[x, y, spikes] = integrate_and_fire(I_e, delta_t, total_time);
+% finally, plot the results using our plotting helper function
+plot_helper(x, y, '3.3: Spikes when I_e Randomly Varies Between 1.5*10^{-9} and 1.15*10^{-8} Amperes');
+
+%% 3.5 part 2: Sin(x) 
+total_time = 0.2;
+% create a vector corresponding to a periodic function for I_e
+I_e = zeros(total_time/delta_t, 1);
+for i = 1:(total_time/delta_t)
+    I_e(i) = (sin(i) + 1.5) *10^-9;
+end 
+% call our helper function to populate the arrays and count the spikes 
+[x, y, spikes] = integrate_and_fire(I_e, delta_t, total_time);
+% finally, plot the results using our plotting helper function
+plot_helper(x, y, '3.3: Spikes when I_e Varies Periodically');
 
 
