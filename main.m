@@ -15,23 +15,31 @@ end
 plot_helper(x, y, '3.3: Spikes when I_e = 5*10^{-9} Amperes');
 
 %% 3.4 We compare the number of spikes to the values of I_e:
-total_time = 1;
-values_of_I_e = zeros(100,1);
+total_time = 1; % we compare firing rates over 1 second 
+values_of_I_e = zeros(100,1); 
 firing_rates = zeros(100, 1);
-val = 0;
+val = 0; 
+% we will test 100 values of I_e starting at 0 and going in increments of 5*10^-10
 for i = 1:100
     values_of_I_e(i) = val;
-    I_e = zeros(total_time/delta_t, 1);
+    %make the vector for I_e to pass into the helper
+    I_e = zeros(total_time/delta_t, 1); 
     for j = 1:(total_time/delta_t)
         I_e(j) = val;
     end 
+    %increment the vlaue of I_e
     val = val + 5*10^-10;
+    %run the model and record the number of spikes
     [x, y, spikes] = integrate_and_fire(I_e, delta_t, total_time);
     firing_rates(i) = spikes;
 end
+% plot the results 
 plot(values_of_I_e, firing_rates, '.-k', LineWidth=2, MarkerSize=10);
 text(1.5*10^-9, 350, {'Intercept:', '1.5*10^{-9}','\downarrow'}, FontSize=16);
 xlabel('Value of I_e (Amperes)', FontSize=16);
 ylabel('Firing Rate (Hertz)', FontSize=16);
 title('Relationship between I_e and Firing Rate', FontSize=20)
+
+%% 3.5 part 1: Randomly varying I_e
+
 
