@@ -7,7 +7,7 @@ function[x, y, num_spikes] = integrate_and_fire(I_e, delta_t, t_total)
     x = zeros(num_samples, 1);
     y = zeros(num_samples, 1);
     % begin the integrate and fire model 
-    V_curr = V_reset
+    V_curr = V_reset;
     elapsed_time = 0;
     num_spikes = 0; % count the number of spikes 
     for i = 1:num_samples
