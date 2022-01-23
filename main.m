@@ -60,7 +60,7 @@ end
 % finally, plot the results using our plotting helper function
 plot_helper(x, y, 'Integrate-and-Fire Model when I_e Randomly Varies Between 1.5*10^{-9} and 1.15*10^{-8} Amperes');
 
-%% Question 5, Second Figure: Multiple samples of randomly varying I_e
+%% Question 5, Second Figure: Multiple samples of randomly varying I_e on the same plot
 total_time = 0.02; 
 % create 25 iterations of the model and plot together to show variation
 for j = 1:25
@@ -82,16 +82,29 @@ ylabel('Membrane potential (Volts)', FontSize=16);
 title('25 Iterations of Integrate-and-Fire Model with Stochiastic I_e', FontSize=20);
 hold off
 
-%% 3.5 part 2: Sin(x) 
-total_time = 0.2;
+%% Question 5, Third Figure: positive Sin(x) 
+total_time = 0.05;
 % create a vector corresponding to a periodic function for I_e
 I_e = zeros(total_time/delta_t, 1);
 for i = 1:(total_time/delta_t)
-    I_e(i) = (sin(i) + 1.5) *10^-9;
+    I_e(i) = (sin(i) + 2.5) *10^-9;
 end 
 % call our helper function to populate the arrays and count the spikes 
-[x, y, spikes] = integrate_and_fire(I_e, delta_t, total_time);
+[x, y, ~] = integrate_and_fire(I_e, delta_t, total_time);
 % finally, plot the results using our plotting helper function
-plot_helper(x, y, '3.3: Spikes when I_e Varies Periodically');
+plot_helper(x, y, 'Integrate-and-Fire Model when I_e Varies Periodically Between 1.5*10^{-9} and 3.5*10^{-9} Amperes');
+
+%% Question 5, Fourth Figure: transposed Sin(x) 
+total_time = 0.02;
+% create a vector corresponding to a periodic function for I_e
+I_e = zeros(total_time/delta_t, 1);
+for i = 1:(total_time/delta_t)
+    I_e(i) = (sin(i) + 0.5) *10^-8;
+end 
+% call our helper function to populate the arrays and count the spikes 
+[x, y, ~] = integrate_and_fire(I_e, delta_t, total_time);
+% finally, plot the results using our plotting helper function
+plot_helper(x, y, 'Integrate-and-Fire Model when I_e Varies Periodically Between -5*10^{-9} and 1.5*10^{-8} Amperes');
+
 
 
