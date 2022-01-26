@@ -27,4 +27,34 @@ in `integrate_and_fire.m`
 
 `main.m` conducts all of our main computations, separated by problem as follows: 
 
+### Computational Simulation
+#### Constant `I_e`
+We begin by testing the most basic implementation fo the Integrate-and-Fire model by keeping `I_e` constant
+across time and calling `integrate_and_fire` to compare different values of `I_e` and graphing the results by
+calling the `plot_helper` function. For example, for `I_e = 1.6*10^-9 amperes,` our `integrate_and_fire` model
+yields the following:
+![](figs/Q3pt2.jpg)
+
+While investigating the effects of a constant `I_e`, we also consider the relationship between the magnitude of
+the external current and the firing rate, measured as the number of spikes per second, by running `integrate_and_fire`
+for one second on a variety of constant `I_e`s. The following step-wise relationship results: 
+![](figs/Q4pt1.jpg)
+
+#### Varying `I_e`
+* Next, we test non-constant values of `I_e` by once again calling `integrate_and_fire` and graphing the results
+with `plot_helper.` We test both stochiastically varying and periodic values for `I_e`, the applied current. When
+looking at a stochiastically varying `I_e`, we compare multiple iterations to demonstrate the effects of randomness 
+on firing rate and amplitude: 
+![](figs/Q5pt2.jpg)
+For periodic functions, no such random variation occurs, but we can clearly observe the effects of a periodic,
+sin-based `I_e` on the membrane potential: 
+![](figs/Q5pt4.jpg)
+
+
+
+### Derivation 
+#### Membrane Dynamics
+Using the solved Integrate-and-Fire differential equation as implemented in 
+
+
 
