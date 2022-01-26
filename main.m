@@ -1,6 +1,7 @@
 %% This is the code in which the main computations are called
 %Written by Sarah Payne, January 2022
 
+% % % % % PART ONE: NUMERICAL SIMULATION % % % % %
 %% Question 3, First Figure: I_e = 5*10^-9 amperes and total time = 0.02 seconds
 delta_t = 0.0001; %seconds 
 total_time = 0.02; %seconds
@@ -106,5 +107,83 @@ end
 % finally, plot the results using our plotting helper function
 plot_helper(x, y, 'Integrate-and-Fire Model when I_e Varies Periodically Between -5*10^{-9} and 1.5*10^{-8} Amperes');
 
+% % % % % PART TWO: DERIVING & FIRING RATES % % % % %
+%% Question 2, First Figure: variation in Tau_m
+% we keep the resting membrane potential constant
+E_L = -0.065; 
+% We initialize arrays that we will use to create our legend
+lines = zeros(5,1);
+labels = ["", "", "", "", ""];
+hold on
+for i=1:5
+    Tau_m = 0.01*i;
+    %call the helper function to get the x & y vectors we will plot
+    [x, y] = V_t(E_L, Tau_m); 
+    %add the line and legend label to their vectors for the legend later
+    lines(i) = plot(x, y, LineWidth=2); 
+    labels(i) = sprintf("Tau_m = %.2f", Tau_m);
+end
+hold off
+% finish the plot of the results
+legend(lines, labels, Location='southeast', Fontsize = 16);
+xlabel('Elapsed time (seconds)', FontSize=16);
+ylabel('Membrane potential (Volts)', FontSize=16);
+title("Effects of Tau_m on V(t)", Fontsize=20);
 
+%% Question 2, Second Figure: Variation in E_L
+% we keep tau_m constant 
+Tau_m = 0.01;
+% we initialize arrays that we will use to create our legend 
+lines = zeros(5,1);
+labels = ["", "", "", "", ""];
+hold on
+for i=1:5
+    E_L = -0.05 -0.01*i;
+    % call the helper function to get the x & y vectors we will plot
+    [x, y] = V_t(E_L, Tau_m);
+    %add the line and legend label to their vectors for the legend later
+    lines(i) = plot(x, y, LineWidth=2);
+    labels(i) = sprintf("E_L = %.2f", E_L);
+end
+hold off
+% finish the plot of the results 
+legend(lines, labels, Location='southeast', Fontsize = 16);
+xlabel('Elapsed time (seconds)', FontSize=16);
+ylabel('Membrane potential (Volts)', FontSize=16);
+title("Effects of E_L on V(t)", Fontsize=20);
 
+%% Question 7: Theoretical firing rate vs. actual firing rate
+% Just as in question 4 of part 1, we measure over a second 
+total_time = 1;
+% Initialize the vectors for plotting
+values_of_I_e = zeros(100,1); 
+firing_rates_theoretical = zeros(100, 1);
+firing_rates_actual = zeros(100, 1);
+% we test 100 difference values of I_e
+for i = 1:100
+    % the current value of i -- set this in the x-axis vector
+    val = i*5*10^-10;
+    values_of_I_e(i) = val;
+    % calculate the theoretical firing rate based on this value of I_e
+    firing_rates_theoretical(i) = 1/theoretical_firing(val);
+    % also calculate the numeric simulation of the firing rate 
+    I_e = zeros(total_time/delta_t, 1); 
+    for j = 1:(total_time/delta_t)
+        I_e(j) = val;
+    end 
+    %run the integrate and fire model and record the number of spikes
+    [~, ~, spikes] = integrate_and_fire(I_e, delta_t, total_time);
+    firing_rates_actual(i) = spikes;
+end
+% plot the results of both the derived and simulated firing rates 
+hold on
+% create the legend & plot it 
+lines = zeros(2,1);
+labels = ["Derived", "Theoretical"];
+lines(1) = plot(values_of_I_e, firing_rates_theoretical, '.-', LineWidth=2, MarkerSize=10);
+lines(2) = plot(values_of_I_e, firing_rates_actual, '.', MarkerSize=15);
+legend(lines, labels, Location='southeast', FontSize=16);
+xlabel('Value of I_e (Amperes)', FontSize=16);
+ylabel('Firing Rate (Hertz)', FontSize=16);
+title('Derived and Simulated Relationship between I_e and Firing Rate', FontSize=20)
+hold off
