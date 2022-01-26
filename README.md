@@ -41,7 +41,7 @@ for one second on a variety of constant `I_e`s. The following step-wise relation
 ![](figs/Q4pt1.jpg)
 
 #### Varying `I_e`
-* Next, we test non-constant values of `I_e` by once again calling `integrate_and_fire` and graphing the results
+Next, we test non-constant values of `I_e` by once again calling `integrate_and_fire` and graphing the results
 with `plot_helper.` We test both stochiastically varying and periodic values for `I_e`, the applied current. When
 looking at a stochiastically varying `I_e`, we compare multiple iterations to demonstrate the effects of randomness 
 on firing rate and amplitude: 
