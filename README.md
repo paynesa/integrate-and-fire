@@ -54,7 +54,20 @@ sin-based `I_e` on the membrane potential:
 
 ### Derivation 
 #### Membrane Dynamics
-Using the solved Integrate-and-Fire differential equation as implemented in 
+Using the solved Integrate-and-Fire differential equation as implemented in `V_t`, we firstly investigate the
+effects of the membrane time constant, `Tau_m`, on the membrane potential over time. As we can see, larger values
+of `Tau_m` lead to a slower growth of the membrane potential as it approaches the resting membrane potential. 
+![](figs/Tau_m_effects.jpg)
 
+Similarly, we may investigate the effect of the resting membrane potential `E_L` on the membrane potential over 
+time. As we can see, `E_L` effects the point to which the membrane potential will eventually converge over time.
+![](figs/E_L_effects.jpg)
+
+#### Applied Current and Firing Rate
+Using the derived measure of firing rate based off of the Integrate-and-Fire differential equation, we can use
+`theoretical_firing` to compare the derived and simulated firing rate across time. As we can see below, the 
+derived firing rate provides an upper bound on the simulated step-wise function, and they match particularly 
+well for small `I_e`:
+![](figs/Q7.jpg)
 
 
