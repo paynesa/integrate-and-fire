@@ -179,7 +179,7 @@ end
 hold on
 % create the legend & plot it 
 lines = zeros(2,1);
-labels = ["Derived", "Theoretical"];
+labels = ["Derived", "Simulated"];
 lines(1) = plot(values_of_I_e, firing_rates_theoretical, '.-', LineWidth=2, MarkerSize=10);
 lines(2) = plot(values_of_I_e, firing_rates_actual, '.', MarkerSize=15);
 legend(lines, labels, Location='southeast', FontSize=16);

@@ -15,10 +15,10 @@ function[x, y, num_spikes] = integrate_and_fire(I_e, delta_t, t_total)
     num_spikes = 0; 
     % begin the integrate and fire model 
     for i = 1:num_samples
-        x(i) = elapsed_time;
-        y(i) = V_curr;
         % calculate the elapsed time and update the membrane potential
         elapsed_time =  (i-1)*delta_t;
+        x(i) = elapsed_time;
+        y(i) = V_curr;
         V_curr = V_curr + (delta_t/Tau_m)*((E_L - V_curr) + R_m*I_e(i));
         if V_curr >= V_threshold
             V_curr = V_reset;
