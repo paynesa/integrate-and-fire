@@ -58,10 +58,16 @@ for i = 1:(total_time/delta_t)
 end 
 % call our helper function to populate the arrays and count the spikes 
 [x, y, ~] = integrate_and_fire(I_e, delta_t, total_time);
-% finally, plot the results using our plotting helper function
+% finally, plot the results of the current 
+plot(x, I_e);
+xlabel('Elapsed time (seconds)', FontSize=16);
+ylabel('Applied Current (amperes)', FontSize=16);
+title('Applied Current I_e Randomly Varies Between 1.5*10^{-9} and 1.15*10^{-8} Amperes', FontSize=20);
+
+%% Question 5, Second Figure: Membrane potential from randomly varying I_e
 plot_helper(x, y, 'Integrate-and-Fire Model when I_e Randomly Varies Between 1.5*10^{-9} and 1.15*10^{-8} Amperes');
 
-%% Question 5, Second Figure: Multiple samples of randomly varying I_e on the same plot
+%% Question 5, Third Figure: Multiple samples of randomly varying I_e on the same plot
 total_time = 0.02; 
 % create 25 iterations of the model and plot together to show variation
 for j = 1:25
@@ -83,7 +89,7 @@ ylabel('Membrane potential (Volts)', FontSize=16);
 title('25 Iterations of Integrate-and-Fire Model with Stochiastic I_e', FontSize=20);
 hold off
 
-%% Question 5, Third Figure: positive Sin(x) 
+%% Question 5, Fourth Figure: I_e for positive Sin(x) 
 total_time = 0.05;
 % create a vector corresponding to a periodic function for I_e
 I_e = zeros(total_time/delta_t, 1);
@@ -92,10 +98,16 @@ for i = 1:(total_time/delta_t)
 end 
 % call our helper function to populate the arrays and count the spikes 
 [x, y, ~] = integrate_and_fire(I_e, delta_t, total_time);
-% finally, plot the results using our plotting helper function
+% finally, plot the results
+plot(x, I_e);
+xlabel('Elapsed time (seconds)', FontSize=16);
+ylabel('Applied Current (amperes)', FontSize=16);
+title('Applied Current I_e = (sin(t) + 2.5) ∗ 10^{−9}', FontSize=20);
+
+%% Question 5, Fifth Figure: Membrane potential for positive Sin(x)
 plot_helper(x, y, 'Integrate-and-Fire Model when I_e Varies Periodically Between 1.5*10^{-9} and 3.5*10^{-9} Amperes');
 
-%% Question 5, Fourth Figure: transposed Sin(x) 
+%% Question 5, Sixth Figure: I_e for transposed Sin(x) 
 total_time = 0.02;
 % create a vector corresponding to a periodic function for I_e
 I_e = zeros(total_time/delta_t, 1);
@@ -104,7 +116,13 @@ for i = 1:(total_time/delta_t)
 end 
 % call our helper function to populate the arrays and count the spikes 
 [x, y, ~] = integrate_and_fire(I_e, delta_t, total_time);
-% finally, plot the results using our plotting helper function
+% finally, plot the results
+plot(x, I_e);
+xlabel('Elapsed time (seconds)', FontSize=16);
+ylabel('Applied Current (amperes)', FontSize=16);
+title('Applied Current I_e = (sin(t) + 0.5) ∗ 10^{−8}', FontSize=20);
+
+%% Question 5, Sixth Figure: 
 plot_helper(x, y, 'Integrate-and-Fire Model when I_e Varies Periodically Between -5*10^{-9} and 1.5*10^{-8} Amperes');
 
 % % % % % PART TWO: DERIVING & FIRING RATES % % % % %
